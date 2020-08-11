@@ -12,9 +12,7 @@ class ServiceController extends Controller
     {
         $services = Service::all();
 
-        return view('services.index', [
-            'services' => $services
-        ]);
+       return $services;
 
     }
 

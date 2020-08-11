@@ -27,8 +27,8 @@ import VueRouter from 'vue-router'
 Vue.use(VueRouter)
 
 import Layout from './views/Layout'
-import ServiceList from './views/Service/Index'
-import ServiceForm from './views/Service/Form'
+import ServiceList from './views/ServiceList'
+import ServiceForm from './views/ServiceForm'
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

@@ -1,10 +1,7 @@
 <template>
-  <div class="container">
-    <p v-if="services.length === 0">
-      Carregando ....
-    </p>
-
-    <table class="table" v-else>
+  <div class="container d-flex justify-content-center  py-5">
+    <p v-if="services.length === 0">Carregando ....</p>
+    <table class="table col-md-7" v-else>
       <thead>
         <tr>
           <th scope="col">ID</th>
@@ -14,8 +11,8 @@
           <th scope="col">Valor</th>
         </tr>
       </thead>
-      <tbody  v-for="service in services" :key="service.id">
-        <tr >
+      <tbody v-for="service in services" :key="service.id">
+        <tr>
           <th scope="row">{{service.id }}</th>
           <td>{{service.client }}</td>
           <td>{{service.salesman }}</td>
@@ -32,15 +29,15 @@ import api from "../services/api";
 
 export default {
   name: "ServiceList",
-  data(){
+  data() {
     return {
-      services: []
-    }
+      services: [],
+    };
   },
   mounted() {
     (async () => {
-      const { data } = await api.get("/api/services");
-      this.services = data
+      const { data } = await api.get("/services");
+      this.services = data;
       console.log(data);
     })();
   },

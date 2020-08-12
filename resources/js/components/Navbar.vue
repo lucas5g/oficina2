@@ -15,11 +15,11 @@
     <div class="collapse navbar-collapse" id="navbarCollapse">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item">
-          <router-link class="nav-link" to="/servicos/listar">Listar</router-link>
+          <router-link class="nav-link " to="/servicos/listar">Listar</router-link>
           <!-- <a class="nav-link" href="/">Listar</a> -->
         </li>
         <li class="nav-item">
-          <router-link class="nav-link" to="/servicos/cadastrar">Cadastrar</router-link>
+          <router-link class="nav-link"  to="/servicos/cadastrar">Cadastrar</router-link>
         </li>
       </ul>
     </div>
@@ -29,8 +29,15 @@
 <script>
 export default {
   name: "Navbar",
+  
 };
 </script>
 
 <style>
+/* #navbarCollapse > ul > li:nth-child(1) > af */
+ .router-link-exact-active{
+  color: routewhite;
+  font-weight: bold;
+  /* background: red; */
+}
 </style>

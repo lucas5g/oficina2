@@ -17,15 +17,29 @@ class ServiceController extends Controller
     }
 
    
-    public function create()
-    {
-        return view('services.form');
-    }
+    // public function create()
+    // {
+    //     return view('services.form');
+    // }
 
    
     public function store(Request $request)
     {
-        //
+
+        // return ['msg' => 'teste'];
+        $service = new Service();
+
+        $service->client = $request->client;
+        $service->salesman = $request->salesman;
+        $service->description = $request->description;
+        $service->value = $request->value;
+
+        $service->save();
+
+        return $service;
+
+        
+        
     }
 
     

@@ -23,12 +23,16 @@ require('./bootstrap');
 
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+import VueCompositionApi from '@vue/composition-api'
 
 Vue.use(VueRouter)
+Vue.use(VueCompositionApi)
+
 
 import Layout from './views/Layout'
 import ServiceList from './views/ServiceList'
 import ServiceForm from './views/ServiceForm'
+import Teste from './views/Teste'
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -40,7 +44,9 @@ const router = new VueRouter({
   routes: [
     { path: '/', component: ServiceList },
     { path: '/servicos/listar', component: ServiceList },
-    { path: '/servicos/cadastrar', component: ServiceForm}
+    { path: '/servicos/cadastrar', component: ServiceForm},
+    { path: '/teste', component: Teste},
+    
 
   ]
 })

@@ -1,11 +1,11 @@
 <template>
   <div class="container d-flex justify-content-center py-5">
-    <p v-if="services.length === 0">Carregando ....</p>
+    <p v-if="!data">Carregando ....</p>
 
-    <div v-else class="">
+    <div v-else>
       <h1 class="border-bottom">Cadastro de Serviço</h1>
 
-      <table class="table ">
+      <table class="table">
         <thead>
           <tr>
             <th scope="col">ID</th>
@@ -15,7 +15,7 @@
             <th scope="col">Valor</th>
           </tr>
         </thead>
-        <tbody v-for="service in services" :key="service.id">
+        <tbody v-for="service in data" :key="service.id">
           <tr>
             <th scope="row">{{service.id }}</th>
             <td>{{service.client }}</td>
@@ -31,20 +31,20 @@
 
 <script>
 import api from "../services/api";
+import useSWRV from "swrv";
 
 export default {
   name: "ServiceList",
-  data() {
+
+  setup() {
+    const { data, error, mutate } = useSWRV("services", async url  => {
+      const response = await api.get(url)
+      return response.data
+    });
+
     return {
-      services: [],
+      data,
     };
-  },
-  mounted() {
-    (async () => {
-      const { data } = await api.get("/services");
-      this.services = data;
-      console.log(data);
-    })();
   },
 };
 </script>

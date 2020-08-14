@@ -3573,19 +3573,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "Navbar"
 });
@@ -8366,7 +8353,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\r\n/* #navbarCollapse > ul > li:nth-child(1) > af */\n.router-link-exact-active{\r\n  color: #fff;\r\n  \r\n  font-weight: bold;\r\n  /* background: red; */\n}\r\n", ""]);
+exports.push([module.i, "\n#nav {\r\n  background-color: #007bff;\r\n  display: flex;\r\n  justify-content: space-between;\r\n  align-items: center;\r\n  /* height: 30px; */\n}\n#nav a{\r\n  color: white;\r\n  text-decoration: none;\r\n  padding-left: 15px;\r\n  /* font-weight: bold; */\n}\n#nav ul{\r\n  list-style: none;\n}\n#nav ul li{\r\n  display: inline;\n}\n#nav ul li a {\r\n  padding-right: 10px;\r\n  /* font-weight:normal ; */\r\n  padding-right: 10px;\n}\r\n\r\n/*class adicionanda pelo vue-router */\n.router-link-exact-active{\r\n  color: #fff;\r\n  font-weight: bold;\n}\r\n\r\n", ""]);
 
 // exports
 
@@ -41470,83 +41457,35 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "nav",
-    { staticClass: "navbar navbar-expand-md navbar-dark bg-primary" },
-    [
-      _c("a", { staticClass: "navbar-brand", attrs: { href: "/" } }, [
-        _vm._v("Oficina 2.0")
-      ]),
-      _vm._v(" "),
-      _vm._m(0),
+  return _c("nav", { attrs: { id: "nav" } }, [
+    _c("a", { attrs: { href: "/" } }, [_vm._v("Oficina 2.0")]),
+    _vm._v(" "),
+    _c("ul", [
+      _c(
+        "li",
+        [
+          _c("router-link", { attrs: { to: "/servicos/listar" } }, [
+            _vm._v("Listar")
+          ])
+        ],
+        1
+      ),
       _vm._v(" "),
       _c(
-        "div",
-        {
-          staticClass: "collapse navbar-collapse",
-          attrs: { id: "navbarCollapse" }
-        },
+        "li",
         [
-          _c("ul", { staticClass: "navbar-nav mr-auto" }, [
-            _c(
-              "li",
-              { staticClass: "nav-item" },
-              [
-                _c(
-                  "router-link",
-                  {
-                    staticClass: "nav-link ",
-                    attrs: { to: "/servicos/listar" }
-                  },
-                  [_vm._v("Listar")]
-                )
-              ],
-              1
-            ),
-            _vm._v(" "),
-            _c(
-              "li",
-              { staticClass: "nav-item" },
-              [
-                _c(
-                  "router-link",
-                  {
-                    staticClass: "nav-link",
-                    attrs: { to: "/servicos/cadastrar" }
-                  },
-                  [_vm._v("Cadastrar")]
-                )
-              ],
-              1
-            )
-          ])
-        ]
+          _c(
+            "router-link",
+            { staticClass: "nav-link", attrs: { to: "/servicos/cadastrar" } },
+            [_vm._v("Cadastrar")]
+          )
+        ],
+        1
       )
-    ]
-  )
+    ])
+  ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "button",
-      {
-        staticClass: "navbar-toggler",
-        attrs: {
-          type: "button",
-          "data-toggle": "collapse",
-          "data-target": "#navbarCollapse",
-          "aria-controls": "navbarCollapse",
-          "aria-expanded": "false",
-          "aria-label": "Toggle navigation"
-        }
-      },
-      [_c("span", { staticClass: "navbar-toggler-icon" })]
-    )
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 

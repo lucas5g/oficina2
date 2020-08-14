@@ -1,44 +1,57 @@
 <template>
-  <nav class="navbar navbar-expand-md navbar-dark bg-primary">
-    <a class="navbar-brand" href="/">Oficina 2.0</a>
-    <button
-      class="navbar-toggler"
-      type="button"
-      data-toggle="collapse"
-      data-target="#navbarCollapse"
-      aria-controls="navbarCollapse"
-      aria-expanded="false"
-      aria-label="Toggle navigation"
-    >
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarCollapse">
-      <ul class="navbar-nav mr-auto">
-        <li class="nav-item">
-          <router-link class="nav-link " to="/servicos/listar">Listar</router-link>
-          <!-- <a class="nav-link" href="/">Listar</a> -->
-        </li>
-        <li class="nav-item">
-          <router-link class="nav-link"  to="/servicos/cadastrar">Cadastrar</router-link>
-        </li>
-      </ul>
-    </div>
+  <nav id="nav">
+    <a href="/">Oficina 2.0</a>
+
+    <ul>
+      <li>
+        <router-link to="/servicos/listar">Listar</router-link>
+      </li>
+      <li>
+        <router-link class="nav-link" to="/servicos/cadastrar">Cadastrar</router-link>
+      </li>
+    </ul>
   </nav>
 </template>
 
 <script>
 export default {
   name: "Navbar",
-  
 };
 </script>
 
 <style>
-/* #navbarCollapse > ul > li:nth-child(1) > af */
- .router-link-exact-active{
-  color: #fff;
-  
-  font-weight: bold;
-  /* background: red; */
+#nav {
+  background-color: #007bff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  /* height: 30px; */
 }
+
+#nav a{
+  color: white;
+  text-decoration: none;
+  padding-left: 15px;
+  /* font-weight: bold; */
+
+}
+#nav ul{
+  list-style: none;
+}
+#nav ul li{
+  display: inline;
+}
+#nav ul li a {
+  padding-right: 10px;
+  /* font-weight:normal ; */
+  padding-right: 10px;
+}
+
+/*class adicionanda pelo vue-router */
+.router-link-exact-active{
+  color: #fff;
+  font-weight: bold;
+
+}
+
 </style>

@@ -25,6 +25,7 @@ export default {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  height: 3rem;
   /* height: 30px; */
 }
 

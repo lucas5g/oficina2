@@ -7,27 +7,28 @@
   {{-- <link rel="stylesheet" href="{{ asset('css/app.css')}}"> --}}
   <title>Oficina 2.0</title>
   <style>
-    html, body, #app{
-      height: 100%;
-      width: 100%;
-
-      margin: 0;
-      bottom: 0;
-      font-family: 'Roboto', sans-serif;
-    }
-    
+   *{
+     margin: 0;
+     padding: 0;
+     box-sizing: border-box;
+     font-family: 'Roboto', sans-serif;
+   }
     #app{
-      /* background: red; */
+      /* background-color: blue; */
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
     }
-    .container{
+
+    /* .container{
       height: 90vh;
-      /* width: 100vw; */
-    } 
+      /* width: 100vw; 
+    }  */
     
   </style>
 </head>
 <body>
-  <div id="app" class="">
+  <div id="app">
     <Layout />
   </div>
 

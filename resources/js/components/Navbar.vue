@@ -11,6 +11,7 @@
       </li>
     </ul>
   </nav>
+
 </template>
 
 <script>
@@ -25,7 +26,7 @@ export default {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  height: 3rem;
+  width: 100%;
   /* height: 30px; */
 }
 

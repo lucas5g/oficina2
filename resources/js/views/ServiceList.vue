@@ -1,10 +1,11 @@
 <template>
-  <div id="container-service-list">
-    <header>
-      <h1>Lista de Serviços</h1>
-    </header>
+  <div id="container">
+    <Navbar />
+
+    <Header text="Lista de Serviços" />
     <main>
       <p v-if="!data">Carregando ....</p>
+
       <table v-else>
         <thead>
           <tr>
@@ -25,16 +26,28 @@
           </tr>
         </tbody>
       </table>
+
+
+    
     </main>
+    <Footer />
   </div>
 </template>
 
 <script>
 import api from "../services/api";
+import Header from "../components/Header";
+import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
 import useSWRV from "swrv";
 
 export default {
   name: "ServiceList",
+  components: {
+    Header,
+    Navbar,
+    Footer,
+  },
 
   setup() {
     const { data, error, mutate } = useSWRV("services", async (url) => {
@@ -50,27 +63,6 @@ export default {
 
 
 <style scoped>
-#container-service-list {
-  /* background: red; */
-  height: 80vh;
-  /* width: 98%; */
-  margin: 0 auto;
-  /* display: flex;
-  flex-direction: column;
-  justify-content: center; */
-}
-#container-service-list header {
-  background-color: #03a9f426;
-  height: 5rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-#container-service-list main{
-  width: 95%;
-  margin: 20px auto;
-}
 
 table {
   border-collapse: collapse;
@@ -84,10 +76,4 @@ td {
 }
 
 
-@media (min-width: 700px) {
-  #container-service-list main{
-    width: 60%;
-    /* background: red; */
-  }
-}
 </style>

@@ -15,10 +15,10 @@ export default {
 <style>
 footer {
   background-color: #03a9f426;
-  height: 5rem;
   display: flex;
   justify-content: center;
   align-items: center;
+  width: 100%;
 }
 
 footer p a{

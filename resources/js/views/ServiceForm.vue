@@ -9,7 +9,7 @@
 
       <TextArea label="Descrição" v-model="service.description" />
 
-      <Input label="Valor" v-model="service.value" />
+      <Input label="Valor" v-model="service.price" v-money="money" />
 
       <button
         type="submit"
@@ -30,6 +30,8 @@
 import api from "../services/api";
 import Input from "../components/Input";
 import TextArea from "../components/TextArea";
+import { VMoney } from "v-money";
+// import money from "v-money"
 export default {
   name: "ServiceList",
   components: {
@@ -40,17 +42,33 @@ export default {
     return {
       btn: { status: false, label: "Cadastrar" },
       service: {
-        // client: "João vinicios",
-        // salesman: "Rodrigo Junior",
-        // description: "Troca das pastilhas",
-        // value: "120",
+       client: "João vinicios",
+        salesman: "Rodrigo Junior",
+        description: "Troca das pastilhas",
+        price: "120.00",
+      },
+      price: 123.45,
+      money: {
+        decimal: ",",
+        thousands: ".",
+        prefix: "R$ ",
+       
+        precision: 2,
+        masked: false /* doesn't work with directive */,
       },
     };
   },
   methods: {
     async handleSubmit(event) {
       event.preventDefault();
-      // console.log(this.service.client)
+      const price = this.service.price
+        .replace('R$', '').toLocaleString('pt-BR')
+      // price = parseFloat(price)
+      // // price = price.replace('R$', '').replace(',', '.')
+      // this.service.price = price 
+
+      // console.log(this.service.price)
+
       // return
       this.btn = { status: true, label: "Cadastrando...." };
       try {

@@ -18,7 +18,7 @@ class CreateServicesTable extends Migration
             $table->string('client');
             $table->string('salesman');
             $table->text('description');
-            $table->decimal('value');
+            $table->decimal('price');
             $table->timestamps();
 
         });

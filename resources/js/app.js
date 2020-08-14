@@ -24,9 +24,12 @@ require('./bootstrap');
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import VueCompositionApi from '@vue/composition-api'
+import money from 'v-money'
 
 Vue.use(VueRouter)
 Vue.use(VueCompositionApi)
+Vue.use(money)
+
 
 
 import Layout from './views/Layout'
@@ -41,6 +44,7 @@ import Teste from './views/Teste'
  */
 
 const router = new VueRouter({
+  mode: 'history',
   routes: [
     { path: '/', component: ServiceList },
     { path: '/servicos/listar', component: ServiceList },

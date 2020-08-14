@@ -13,8 +13,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
-Route::view('/', 'spa');
-Route::resource('/services', 'ServiceController');
+Route::view('{path}', 'spa')->where('path', '[\/\w\.-]*');
+// Route::resource('/services', 'ServiceController');
+

@@ -36,7 +36,8 @@ export default {
 <style>
 /* #navbarCollapse > ul > li:nth-child(1) > af */
  .router-link-exact-active{
-  color: routewhite;
+  color: #fff;
+  
   font-weight: bold;
   /* background: red; */
 }

@@ -1,11 +1,10 @@
 <template>
-  <div class="form-group">
-    <label class="w-100">
+  <div id="form-group">
+    <label>
       {{label}}
       <input
         type="text"
         :value="value"
-        class="form-control form-control-lg"
         required
         @input="$emit('input', $event.target.value)"
       />
@@ -20,40 +19,22 @@ export default {
     label: String,
     value: String,
   },
- 
-  
 };
 </script>
-
-<style>
-/* #input {
-  margin-bottom: 1rem;
-  background: red;
-  width: 100%;
+<style scoped>
+#form-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1.5rem;
 }
 
-#input label {
+#form-group input {
   width: 100%;
+  /* height: 2.5rem; */
+  padding: 0.7rem;
+  border-radius: 5px;
+  border: 1px solid grey;
+  margin-top: 0.4rem;
 }
 
-#input label input {
-  height: calc(1.5em + 1rem + 2px);
-  padding: 0.5rem 1rem;
-  font-size: 1.125rem;
-  line-height: 1.5;
-  border-radius: 0.3rem;
-  display: block;
-  width: 100%;
-  height: calc(1.6em + 0.75rem + 2px);
-  padding: 0.375rem 0.75rem;
-  font-size: 0.9rem;
-  font-weight: 400;
-  line-height: 1.6;
-  color: #495057;
-  background-color: #fff;
-  background-clip: padding-box;
-  border: 1px solid #ced4da;
-  border-radius: 0.25rem;
-  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
-} */
 </style>

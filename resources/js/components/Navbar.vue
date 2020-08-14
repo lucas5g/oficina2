@@ -11,7 +11,6 @@
       </li>
     </ul>
   </nav>
-
 </template>
 
 <script>
@@ -30,30 +29,28 @@ export default {
   /* height: 30px; */
 }
 
-#nav a{
+#nav > a {
   color: white;
   text-decoration: none;
   padding-left: 15px;
-  /* font-weight: bold; */
-
+  font-weight: bold;
 }
-#nav ul{
+#nav ul {
   list-style: none;
 }
-#nav ul li{
+#nav ul li {
   display: inline;
 }
 #nav ul li a {
-  padding-right: 10px;
+  margin-right: 20px;
+  color: white;
+  text-decoration: none;
   /* font-weight:normal ; */
-  padding-right: 10px;
 }
 
 /*class adicionanda pelo vue-router */
-.router-link-exact-active{
+.router-link-exact-active {
   color: #fff;
   font-weight: bold;
-
 }
-
 </style>

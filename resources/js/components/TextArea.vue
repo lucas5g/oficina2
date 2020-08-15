@@ -33,6 +33,7 @@ export default {
 #form-group label textarea {
   width: 100%;
   /* height: 2.5rem; */
+  font-size: 1rem;
   padding: 0.7rem;
   border-radius: 5px;
   border: 1px solid grey;

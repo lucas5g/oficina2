@@ -22,7 +22,7 @@
             <td>{{service.client }}</td>
             <td>{{service.salesman }}</td>
             <td>{{service.description }}</td>
-            <td>{{service.price }}</td>
+            <td>{{formatter.format(service.price) }}</td>
           </tr>
         </tbody>
       </table>
@@ -48,6 +48,15 @@ export default {
     Navbar,
     Footer,
   },
+  data(){
+    return {
+      formatter: new Intl.NumberFormat('pt-BR', {
+        style: 'currency',
+        currency: 'BRL',
+        minimumFractionDigits: 2
+      })
+    }
+  }, 
 
   setup() {
     const { data, error, mutate } = useSWRV("services", async (url) => {

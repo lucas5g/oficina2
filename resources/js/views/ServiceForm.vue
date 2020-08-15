@@ -11,7 +11,7 @@
 
         <TextArea label="Descrição" v-model="service.description" />
 
-        <Input label="Valor" v-model="service.price" v-money="money" />
+        <Input label="Valor" v-model="service.priceInitial" v-money="money" />
 
         <div class="input-block">
           <button class="button" type="submit" v-bind:disabled="btn.status">{{btn.label}}</button>
@@ -46,17 +46,15 @@ export default {
     return {
       btn: { status: false, label: "Cadastrar" },
       service: {
-        client: "João vinicios",
-        salesman: "Rodrigo Junior",
-        description: "Troca das pastilhas",
-        price: "120.00",
+        // client: "João vinicios",
+        // salesman: "Rodrigo Junior",
+        // description: "Troca das pastilhas",
+        // priceInitial: "1350.00",
       },
-      price: 123.45,
       money: {
         decimal: ",",
         thousands: ".",
         prefix: "R$ ",
-
         precision: 2,
         masked: false /* doesn't work with directive */,
       },
@@ -65,13 +63,22 @@ export default {
   methods: {
     async handleSubmit(event) {
       event.preventDefault();
-      const price = this.service.price
+      const price = this.service.priceInitial
         .replace("R$", "")
-        .toLocaleString("pt-BR");
+        .replace(".", "")
+        .replace(",", ".");
+      // .toLocaleString("en-US");
+
+      const newService = {
+        client: this.service.client,
+        salesman: this.service.salesman,
+        description: this.service.description,
+        price,
+      };
 
       this.btn = { status: true, label: "Cadastrando...." };
       try {
-        await api.post("services", this.service);
+        await api.post("services", newService);
         this.$router.push("/servicos/listar");
       } catch (err) {
         window.alert("Erro ao cadastrar");
@@ -99,7 +106,7 @@ form .input-block {
   width: 100%;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  column-gap: 2rem; 
+  column-gap: 2rem;
 }
 
 form .input-block button {

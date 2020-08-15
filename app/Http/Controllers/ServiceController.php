@@ -32,7 +32,7 @@ class ServiceController extends Controller
         $service->client = $request->client;
         $service->salesman = $request->salesman;
         $service->description = $request->description;
-        $service->value = $request->value;
+        $service->price = $request->price;
 
         $service->save();
 

@@ -31,10 +31,11 @@ export default {
 #form-group input {
   width: 100%;
   /* height: 2.5rem; */
-  padding: 0.7rem;
+  padding: 0.9rem;
   border-radius: 5px;
   border: 1px solid grey;
   margin-top: 0.4rem;
+  font-size: 1rem;
 }
 
 </style>

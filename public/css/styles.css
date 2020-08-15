@@ -12,15 +12,13 @@
   grid-template-areas: 'navbar' 'header' 'main' 'footer'
 }
 
-#container nav {
-  /* background: red; */
+/* #container nav {
   grid-area: navbar;
 }
 
 #container header {
-  /* background: purple; */
   grid-area: header;
-}
+} */
 
 #container main {
   /* background: blue; */
@@ -37,6 +35,6 @@
 
 @media (min-width: 700px) {
   #container main {
-    width: 50%;
+    width: 60%;
   }
 }

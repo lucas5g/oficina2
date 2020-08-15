@@ -3731,13 +3731,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         status: false,
         label: "Cadastrar"
       },
-      service: {
-        client: "João vinicios",
-        salesman: "Rodrigo Junior",
-        description: "Troca das pastilhas",
-        price: "120.00"
+      service: {// client: "João vinicios",
+        // salesman: "Rodrigo Junior",
+        // description: "Troca das pastilhas",
+        // priceInitial: "1350.00",
       },
-      price: 123.45,
       money: {
         decimal: ",",
         thousands: ".",
@@ -3754,39 +3752,46 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       var _this = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
-        var price;
+        var price, newService;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
                 event.preventDefault();
-                price = _this.service.price.replace("R$", "").toLocaleString("pt-BR");
+                price = _this.service.priceInitial.replace("R$", "").replace(".", "").replace(",", "."); // .toLocaleString("en-US");
+
+                newService = {
+                  client: _this.service.client,
+                  salesman: _this.service.salesman,
+                  description: _this.service.description,
+                  price: price
+                };
                 _this.btn = {
                   status: true,
                   label: "Cadastrando...."
                 };
-                _context.prev = 3;
-                _context.next = 6;
-                return _services_api__WEBPACK_IMPORTED_MODULE_1__["default"].post("services", _this.service);
+                _context.prev = 4;
+                _context.next = 7;
+                return _services_api__WEBPACK_IMPORTED_MODULE_1__["default"].post("services", newService);
 
-              case 6:
+              case 7:
                 _this.$router.push("/servicos/listar");
 
-                _context.next = 13;
+                _context.next = 14;
                 break;
 
-              case 9:
-                _context.prev = 9;
-                _context.t0 = _context["catch"](3);
+              case 10:
+                _context.prev = 10;
+                _context.t0 = _context["catch"](4);
                 window.alert("Erro ao cadastrar");
                 window.location.reload();
 
-              case 13:
+              case 14:
               case "end":
                 return _context.stop();
             }
           }
-        }, _callee, null, [[3, 9]]);
+        }, _callee, null, [[4, 10]]);
       }))();
     }
   }
@@ -3863,6 +3868,15 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     Header: _components_Header__WEBPACK_IMPORTED_MODULE_2__["default"],
     Navbar: _components_Navbar__WEBPACK_IMPORTED_MODULE_3__["default"],
     Footer: _components_Footer__WEBPACK_IMPORTED_MODULE_4__["default"]
+  },
+  data: function data() {
+    return {
+      formatter: new Intl.NumberFormat('pt-BR', {
+        style: 'currency',
+        currency: 'BRL',
+        minimumFractionDigits: 2
+      })
+    };
   },
   setup: function setup() {
     var _useSWRV = Object(swrv__WEBPACK_IMPORTED_MODULE_5__["default"])("services", /*#__PURE__*/function () {
@@ -8409,7 +8423,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n#form-group[data-v-3814db6f] {\r\n  display: flex;\r\n  flex-direction: column;\r\n  margin-bottom: 1.5rem;\n}\n#form-group input[data-v-3814db6f] {\r\n  width: 100%;\r\n  /* height: 2.5rem; */\r\n  padding: 0.7rem;\r\n  border-radius: 5px;\r\n  border: 1px solid grey;\r\n  margin-top: 0.4rem;\n}\r\n\r\n", ""]);
+exports.push([module.i, "\n#form-group[data-v-3814db6f] {\r\n  display: flex;\r\n  flex-direction: column;\r\n  margin-bottom: 1.5rem;\n}\n#form-group input[data-v-3814db6f] {\r\n  width: 100%;\r\n  /* height: 2.5rem; */\r\n  padding: 0.9rem;\r\n  border-radius: 5px;\r\n  border: 1px solid grey;\r\n  margin-top: 0.4rem;\r\n  font-size: 1rem;\n}\r\n\r\n", ""]);
 
 // exports
 
@@ -8447,7 +8461,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n#form-group {\r\n  display: flex;\r\n  flex-direction: column;\r\n  margin-bottom: 1.5rem;\n}\n#form-group label textarea {\r\n  width: 100%;\r\n  /* height: 2.5rem; */\r\n  padding: 0.7rem;\r\n  border-radius: 5px;\r\n  border: 1px solid grey;\r\n  margin-top: 0.4rem;\r\n  height:5rem;\n}\r\n", ""]);
+exports.push([module.i, "\n#form-group {\r\n  display: flex;\r\n  flex-direction: column;\r\n  margin-bottom: 1.5rem;\n}\n#form-group label textarea {\r\n  width: 100%;\r\n  /* height: 2.5rem; */\r\n  font-size: 1rem;\r\n  padding: 0.7rem;\r\n  border-radius: 5px;\r\n  border: 1px solid grey;\r\n  margin-top: 0.4rem;\r\n  height:5rem;\n}\r\n", ""]);
 
 // exports
 
@@ -41920,11 +41934,11 @@ var render = function() {
               ],
               attrs: { label: "Valor" },
               model: {
-                value: _vm.service.price,
+                value: _vm.service.priceInitial,
                 callback: function($$v) {
-                  _vm.$set(_vm.service, "price", $$v)
+                  _vm.$set(_vm.service, "priceInitial", $$v)
                 },
-                expression: "service.price"
+                expression: "service.priceInitial"
               }
             }),
             _vm._v(" "),
@@ -42013,7 +42027,9 @@ var render = function() {
                       _vm._v(" "),
                       _c("td", [_vm._v(_vm._s(service.description))]),
                       _vm._v(" "),
-                      _c("td", [_vm._v(_vm._s(service.price))])
+                      _c("td", [
+                        _vm._v(_vm._s(_vm.formatter.format(service.price)))
+                      ])
                     ])
                   ])
                 })

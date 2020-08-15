@@ -76,13 +76,18 @@ export default {
 table {
   border-collapse: collapse;
   width: 100%;
+  table-layout: fixed;
 }
 th,
 td {
   padding: 8px;
   text-align: left;
   border-bottom: 1px solid #ddd;
+  word-wrap: break-word;
 }
+/* th:first{
+  padding: 3px;
+} */
 
 
 </style>

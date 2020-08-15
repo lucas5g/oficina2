@@ -3,7 +3,7 @@
     <label>
       {{label}}
       <input
-        type="text"
+        :type=  "type || 'text'" 
         :value="value"
         required
         @input="$emit('input', $event.target.value)"
@@ -16,8 +16,10 @@
 export default {
   name: "Input",
   props: {
+    type: String,
     label: String,
     value: String,
+
   },
 };
 </script>

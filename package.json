@@ -27,6 +27,7 @@
         "vue-template-compiler": "^2.6.10"
     },
     "dependencies": {
+        "moment": "^2.27.0",
         "swrv": "^0.7.2",
         "v-money": "^0.8.1",
         "vue-router": "^3.4.3"

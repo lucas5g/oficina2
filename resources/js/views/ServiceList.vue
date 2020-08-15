@@ -4,31 +4,34 @@
 
     <Header text="Lista de Serviços" />
     <main>
+      <Input type="date" label="Data do Serviço" v-model="date" @input="handleSubmit" />
+      <Input label="Cliente" v-model="client" @input="handleSubmit" />
+      <Input label="Vendedor" v-model="salesman" @input="handleSubmit" />
+
       <p v-if="!data">Carregando ....</p>
 
       <table v-else>
         <thead>
           <tr>
-            <th scope="col">ID</th>
+            <!-- <th scope="col">ID</th> -->
+            <th scope="col">Data</th>
             <th scope="col">Cliente</th>
             <th scope="col">Vendedor</th>
             <th scope="col">Descrição</th>
-            <th scope="col">Valor</th>
+            <th scope="col">Valor (R$)</th>
           </tr>
         </thead>
         <tbody v-for="service in data" :key="service.id">
           <tr>
-            <th scope="row">{{service.id }}</th>
+            <th>{{service.created_at | moment }}</th>
+            <!-- <th scope="row">{{service.id }}</th> -->
             <td>{{service.client }}</td>
             <td>{{service.salesman }}</td>
             <td>{{service.description }}</td>
-            <td>{{formatter.format(service.price) }}</td>
+            <td>{{ service.price | toCurrency }}</td>
           </tr>
         </tbody>
       </table>
-
-
-    
     </main>
     <Footer />
   </div>
@@ -39,6 +42,8 @@ import api from "../services/api";
 import Header from "../components/Header";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
+import Input from "../components/Input";
+import moment from "moment";
 import useSWRV from "swrv";
 
 export default {
@@ -47,17 +52,28 @@ export default {
     Header,
     Navbar,
     Footer,
+    Input,
   },
-  data(){
-    return {
-      formatter: new Intl.NumberFormat('pt-BR', {
-        style: 'currency',
-        currency: 'BRL',
-        minimumFractionDigits: 2
-      })
-    }
-  }, 
 
+  data(){
+    return{
+      date: '2020-10-10',
+      client: 'Lucas',
+      salesman: 'João'
+    }
+  },
+  methods:{
+  
+    handleSubmit(){
+      const data = {
+        date: this.date,
+        client: this.client,
+        salesman: this.salesman
+      }
+
+      console.log({ data })
+    }
+  },
   setup() {
     const { data, error, mutate } = useSWRV("services", async (url) => {
       const response = await api.get(url);
@@ -67,12 +83,27 @@ export default {
       data,
     };
   },
+  filters: {
+    toCurrency: function (value) {
+
+      const formatter = new Intl.NumberFormat("pt-BR", {
+        style: "currency",
+        currency: "BRL",
+        minimumFractionDigits: 2,
+      });
+      const valueFormated =  formatter.format(value);
+      return valueFormated.replace('R$', '')
+    },
+    moment(date) {
+
+      return moment(date).format("DD/MM/YY");
+    },
+  },
 };
 </script>
 
 
 <style scoped>
-
 table {
   border-collapse: collapse;
   width: 100%;
@@ -80,7 +111,7 @@ table {
 }
 th,
 td {
-  padding: 8px;
+  padding: 10px;
   text-align: left;
   border-bottom: 1px solid #ddd;
   word-wrap: break-word;
@@ -88,6 +119,4 @@ td {
 /* th:first{
   padding: 3px;
 } */
-
-
 </style>

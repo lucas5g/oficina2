@@ -25,10 +25,12 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import VueCompositionApi from '@vue/composition-api'
 import money from 'v-money'
+import moment from 'moment'
 
 Vue.use(VueRouter)
 Vue.use(VueCompositionApi)
 Vue.use(money)
+Vue.use(moment)
 
 
 

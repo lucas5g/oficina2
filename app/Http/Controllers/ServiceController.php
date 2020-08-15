@@ -8,21 +8,24 @@ use Illuminate\Http\Request;
 class ServiceController extends Controller
 {
    
-    public function index()
+    public function index(Request $request)
     {
-        $services = Service::all();
+        // $date = $request->query('date');
+        // $client = $request->query('client');
+        // $salesman = $request->query('salesman');
+        $query = $request->query();
 
-       return $services;
+        $services = Service::where([
+                ['created_at', 'LIKE',  "{$query['date']}%"],
+                ['client', 'LIKE', '%'.$query['client'].'%'],
+                ['salesman', 'LIKE', '%'.$query['salesman'].'%'],
+
+            ])->get();
+
+        return $services;
 
     }
-
-   
-    // public function create()
-    // {
-    //     return view('services.form');
-    // }
-
-   
+  
     public function store(Request $request)
     {
 
@@ -48,13 +51,7 @@ class ServiceController extends Controller
         //
     }
 
- 
-    public function edit(Service $service)
-    {
-        //
-    }
 
-    
     public function update(Request $request, Service $service)
     {
         //

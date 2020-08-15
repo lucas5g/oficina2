@@ -3881,58 +3881,56 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   },
   data: function data() {
     return {
-      date: '2020-10-10',
-      client: 'Lucas',
-      salesman: 'João'
+      date: "",
+      client: "",
+      salesman: "",
+      services: []
     };
   },
   methods: {
     handleSubmit: function handleSubmit() {
-      var data = {
-        date: this.date,
-        client: this.client,
-        salesman: this.salesman
-      };
-      console.log({
-        data: data
-      });
-    }
-  },
-  setup: function setup() {
-    var _useSWRV = Object(swrv__WEBPACK_IMPORTED_MODULE_7__["default"])("services", /*#__PURE__*/function () {
-      var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee(url) {
-        var response;
+      var _this = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
+        var obj, _yield$api$get, data;
+
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                _context.next = 2;
-                return _services_api__WEBPACK_IMPORTED_MODULE_1__["default"].get(url);
+                obj = {
+                  date: _this.date,
+                  client: _this.client,
+                  salesman: _this.salesman
+                };
+                _context.next = 3;
+                return _services_api__WEBPACK_IMPORTED_MODULE_1__["default"].get("services", {
+                  params: obj
+                });
 
-              case 2:
-                response = _context.sent;
-                return _context.abrupt("return", response.data);
+              case 3:
+                _yield$api$get = _context.sent;
+                data = _yield$api$get.data;
+                _this.services = data; // console.log(data);
 
-              case 4:
+              case 6:
               case "end":
                 return _context.stop();
             }
           }
         }, _callee);
-      }));
-
-      return function (_x) {
-        return _ref.apply(this, arguments);
-      };
-    }()),
-        data = _useSWRV.data,
-        error = _useSWRV.error,
-        mutate = _useSWRV.mutate;
-
-    return {
-      data: data
-    };
+      }))();
+    }
   },
+  // setup() {
+  //   const { data, error, mutate } = useSWRV("services", async (url) => {
+  //     const response = await api.get(url);
+  //     return response.data;
+  //   });
+  //   return {
+  //     data,
+  //   };
+  // },
   filters: {
     toCurrency: function toCurrency(value) {
       var formatter = new Intl.NumberFormat("pt-BR", {
@@ -3941,7 +3939,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         minimumFractionDigits: 2
       });
       var valueFormated = formatter.format(value);
-      return valueFormated.replace('R$', '');
+      return valueFormated.replace("R$", "");
     },
     moment: function moment(date) {
       return moment__WEBPACK_IMPORTED_MODULE_6___default()(date).format("DD/MM/YY");
@@ -63271,14 +63269,13 @@ var render = function() {
             }
           }),
           _vm._v(" "),
-          !_vm.data
-            ? _c("p", [_vm._v("Carregando ....")])
-            : _c(
+          _vm.services.length > 0
+            ? _c(
                 "table",
                 [
                   _vm._m(0),
                   _vm._v(" "),
-                  _vm._l(_vm.data, function(service) {
+                  _vm._l(_vm.services, function(service) {
                     return _c("tbody", { key: service.id }, [
                       _c("tr", [
                         _c("th", [
@@ -63300,6 +63297,7 @@ var render = function() {
                 ],
                 2
               )
+            : _vm._e()
         ],
         1
       ),

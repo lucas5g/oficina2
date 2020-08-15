@@ -8,9 +8,9 @@
       <Input label="Cliente" v-model="client" @input="handleSubmit" />
       <Input label="Vendedor" v-model="salesman" @input="handleSubmit" />
 
-      <p v-if="!data">Carregando ....</p>
+      <!-- <p v-if="!data">Carregando ....</p> -->
 
-      <table v-else>
+      <table v-if="services.length > 0">
         <thead>
           <tr>
             <!-- <th scope="col">ID</th> -->
@@ -21,7 +21,7 @@
             <th scope="col">Valor (R$)</th>
           </tr>
         </thead>
-        <tbody v-for="service in data" :key="service.id">
+        <tbody v-for="service in services" :key="service.id">
           <tr>
             <th>{{service.created_at | moment }}</th>
             <!-- <th scope="row">{{service.id }}</th> -->
@@ -55,47 +55,49 @@ export default {
     Input,
   },
 
-  data(){
-    return{
-      date: '2020-10-10',
-      client: 'Lucas',
-      salesman: 'João'
-    }
-  },
-  methods:{
-  
-    handleSubmit(){
-      const data = {
-        date: this.date,
-        client: this.client,
-        salesman: this.salesman
-      }
-
-      console.log({ data })
-    }
-  },
-  setup() {
-    const { data, error, mutate } = useSWRV("services", async (url) => {
-      const response = await api.get(url);
-      return response.data;
-    });
+  data() {
     return {
-      data,
+      date: "",
+      client: "",
+      salesman: "",
+      services: [],
     };
   },
+  methods: {
+    async handleSubmit() {
+      const obj = {
+        date: this.date,
+        client: this.client,
+        salesman: this.salesman,
+      };
+
+      const { data } = await api.get("services", {
+        params: obj,
+      });
+      this.services = data
+      // console.log(data);
+    },
+  },
+  // setup() {
+  //   const { data, error, mutate } = useSWRV("services", async (url) => {
+  //     const response = await api.get(url);
+  //     return response.data;
+  //   });
+  //   return {
+  //     data,
+  //   };
+  // },
   filters: {
     toCurrency: function (value) {
-
       const formatter = new Intl.NumberFormat("pt-BR", {
         style: "currency",
         currency: "BRL",
         minimumFractionDigits: 2,
       });
-      const valueFormated =  formatter.format(value);
-      return valueFormated.replace('R$', '')
+      const valueFormated = formatter.format(value);
+      return valueFormated.replace("R$", "");
     },
     moment(date) {
-
       return moment(date).format("DD/MM/YY");
     },
   },

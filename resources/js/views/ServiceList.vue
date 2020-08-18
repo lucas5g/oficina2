@@ -32,6 +32,7 @@
           </tr>
         </tbody>
       </table>
+      
     </main>
     <Footer />
   </div>

@@ -3864,6 +3864,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
 
 
 
@@ -79167,7 +79168,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
 
 var api = axios__WEBPACK_IMPORTED_MODULE_0___default.a.create({
-  baseURL: window.location.hostname.includes('localhost') ? 'http://localhost:8000/api' : 'https://oficina2.azurewebsites.net/api'
+  baseURL: window.location.hostname.includes('localhost') ? 'http://localhost:8000/api' : 'https://oficina2.azurewebsites.net'
 });
 /* harmony default export */ __webpack_exports__["default"] = (api);
 

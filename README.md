@@ -3,7 +3,7 @@
 Aplicação que visa facilitar o acompanhamento dos pedidos de orçamento da oficina. 
 
 
-![alt text]('https://oficina2.azurewebsites.net/public/img/preview.git')
+![alt text]('https://lucas5g.github.io/files/preview.gif')
 
 
 ## Backend

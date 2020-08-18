@@ -3,7 +3,7 @@
 Aplicação que visa facilitar o acompanhamento dos pedidos de orçamento da oficina. 
 
 
-![alt text]('./public/img/preview.git')
+![alt text]('../public/img/preview.git')
 
 
 ## Backend

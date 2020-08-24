@@ -3,7 +3,7 @@
 Aplicação que visa facilitar o acompanhamento dos pedidos de orçamento da oficina. 
 
 
-![alt text]('/public/img/preview.git')
+![alt text](https://lucas5g.github.io/files/preview.gif)
 
 
 ## Backend
@@ -17,5 +17,5 @@ VueJs
 
 ## Resultado da aplicação
 
-[Clique aqui](https://oficina2.azurewebsites.com.br).
+[Clique aqui](https://oficina2.azurewebsites.net).
 

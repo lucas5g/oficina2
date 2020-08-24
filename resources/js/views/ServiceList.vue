@@ -4,9 +4,11 @@
 
     <Header text="Lista de Serviços" />
     <main>
-      <Input type="date" label="Data do Serviço" v-model="date" @input="handleSubmit" />
-      <Input label="Cliente" v-model="client" @input="handleSubmit" />
-      <Input label="Vendedor" v-model="salesman" @input="handleSubmit" />
+      <div id="input-block">
+        <Input type="date" label="Data do Serviço" v-model="date" @input="handleSubmit" />
+        <Input label="Cliente" v-model="client" @input="handleSubmit" />
+        <Input label="Vendedor" v-model="salesman" @input="handleSubmit" />
+      </div>
 
       <!-- <p v-if="!data">Carregando ....</p> -->
       <table v-if="services.length > 0">
@@ -106,6 +108,7 @@ export default {
 
 
 <style scoped>
+
 table {
   border-collapse: collapse;
   width: 100%;
@@ -118,7 +121,12 @@ td {
   border-bottom: 1px solid #ddd;
   word-wrap: break-word;
 }
-/* th:first{
-  padding: 3px;
-} */
+@media (min-width: 700px) {
+  main #input-block {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 1rem;
+
+  }
+}
 </style>

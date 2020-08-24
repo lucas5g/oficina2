@@ -2,8 +2,11 @@
   <div id="container">
     <!-- <div class="d-flex justify-content-center aling-itens-center bg-primary h-100"> -->
     <Navbar />
-    <Header text="Cadastrar Serviço" />
+    <Header :text="header" />
     <main>
+      <div id="delete">
+        <button id="btn-delete" v-if="idService" @click="handleDelete">Excluir Serviço</button>
+      </div>
       <form @submit="handleSubmit">
         <Input label="Cliente" v-model="service.client" />
 
@@ -11,7 +14,7 @@
 
         <TextArea label="Descrição" v-model="service.description" />
 
-        <Input label="Valor" v-model="service.priceInitial" v-money="money" />
+        <Input label="Valor" v-model="service.price" v-money="money" />
 
         <div class="input-block">
           <button class="button" type="submit" v-bind:disabled="btn.status">{{btn.label}}</button>
@@ -45,25 +48,33 @@ export default {
   data() {
     return {
       btn: { status: false, label: "Cadastrar" },
+      header: "Cadastrar Serviço",
       service: {
         // client: "João vinicios",
         // salesman: "Rodrigo Junior",
         // description: "Troca das pastilhas",
-        // priceInitial: "1350.00",
+        // price: "1350.00",
+
+        client: "",
+        salesman: "",
+        description: "",
+        price: "",
       },
+      idService: this.$route.params.id,
       money: {
         decimal: ",",
         thousands: ".",
         prefix: "R$ ",
         precision: 2,
         masked: false /* doesn't work with directive */,
+        default: 15.0,
       },
     };
   },
   methods: {
     async handleSubmit(event) {
       event.preventDefault();
-      const price = this.service.priceInitial
+      const price = this.service.price
         .replace("R$", "")
         .replace(".", "")
         .replace(",", ".");
@@ -76,17 +87,72 @@ export default {
         price,
       };
 
-      this.btn = { status: true, label: "Cadastrando...." };
+      if (this.idService === undefined) {
+        this.btn = { status: true, label: "Cadastrando...." };
+
+        try {
+          await api.post("services", newService);
+          this.$router.push("/servicos/listar");
+        } catch (err) {
+          window.alert("Erro ao cadastrar");
+          window.location.reload();
+        }
+        return;
+      }
+
       try {
-        await api.post("services", newService);
+        this.btn = { status: true, label: "Editando...." };
+
+        await api.put(`services/${this.idService}`, newService);
+        window.alert("Editado com Sucesso");
         this.$router.push("/servicos/listar");
       } catch (err) {
-        window.alert("Erro ao cadastrar");
+        console.log(err);
+        window.alert("Erro ao Editar");
         window.location.reload();
       }
+      return;
 
       // console.log(this.service.value);
     },
+
+    async handleDelete() {
+      try {
+        await api.delete(`services/${this.idService}`);
+        window.alert("Deletado com Sucesso");
+        this.$router.push("/servicos/listar");
+      } catch (err) {
+        console.log(err);
+        // window.alert("Erro ao Excluir");
+        // window.location.reload();
+      }
+      console.log("delete");
+    },
+  },
+  mounted() {
+    if (this.idService === undefined) {
+      this.service = {
+        client: "",
+        salesman: "",
+        description: "",
+        price: "",
+      };
+      return;
+    }
+    (async () => {
+      try {
+        const { data } = await api.get(`services/${this.idService}`);
+        this.service = data;
+      }catch(err){
+        this.$router.push('/servicos/listar')
+      }
+    })();
+
+    // console.log(this.$route.params.id);
+    this.header = "Editar Serviço";
+    this.btn = {
+      label: "Editar",
+    };
   },
 };
 </script>
@@ -135,5 +201,27 @@ form .input-block a {
   border: 1px solid transparent;
   display: block;
   text-align: center;
+}
+
+#delete {
+  width: 100%;
+  display: flex;
+
+  flex-direction: column;
+  /* justify-content: end; */
+  align-items: flex-end;
+}
+#btn-delete {
+  width: 10rem;
+  padding: 0.7rem;
+  background: red;
+  border: 1px solid transparent;
+  font-size: 1rem;
+  font-weight: 500;
+  float: right;
+  color: #fff;
+  cursor: pointer;
+
+  /* font */
 }
 </style>

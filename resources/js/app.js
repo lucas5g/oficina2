@@ -51,6 +51,8 @@ const router = new VueRouter({
     { path: '/', component: ServiceList },
     { path: '/servicos/listar', component: ServiceList },
     { path: '/servicos/cadastrar', component: ServiceForm},
+    { path: '/servicos/editar/:id', component: ServiceForm},
+    
     { path: '/teste', component: Teste},
     
 

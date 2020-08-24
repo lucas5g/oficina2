@@ -3709,6 +3709,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
 
 
 
@@ -3732,11 +3735,18 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         status: false,
         label: "Cadastrar"
       },
-      service: {// client: "João vinicios",
+      header: "Cadastrar Serviço",
+      service: {
+        // client: "João vinicios",
         // salesman: "Rodrigo Junior",
         // description: "Troca das pastilhas",
-        // priceInitial: "1350.00",
+        // price: "1350.00",
+        client: "",
+        salesman: "",
+        description: "",
+        price: ""
       },
+      idService: this.$route.params.id,
       money: {
         decimal: ",",
         thousands: ".",
@@ -3744,7 +3754,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         precision: 2,
         masked: false
         /* doesn't work with directive */
-
+        ,
+        "default": 15.0
       }
     };
   },
@@ -3759,7 +3770,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             switch (_context.prev = _context.next) {
               case 0:
                 event.preventDefault();
-                price = _this.service.priceInitial.replace("R$", "").replace(".", "").replace(",", "."); // .toLocaleString("en-US");
+                price = _this.service.price.replace("R$", "").replace(".", "").replace(",", "."); // .toLocaleString("en-US");
 
                 newService = {
                   client: _this.service.client,
@@ -3767,34 +3778,158 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   description: _this.service.description,
                   price: price
                 };
+
+                if (!(_this.idService === undefined)) {
+                  _context.next = 16;
+                  break;
+                }
+
                 _this.btn = {
                   status: true,
                   label: "Cadastrando...."
                 };
-                _context.prev = 4;
-                _context.next = 7;
+                _context.prev = 5;
+                _context.next = 8;
                 return _services_api__WEBPACK_IMPORTED_MODULE_1__["default"].post("services", newService);
 
-              case 7:
+              case 8:
                 _this.$router.push("/servicos/listar");
 
-                _context.next = 14;
+                _context.next = 15;
                 break;
 
-              case 10:
-                _context.prev = 10;
-                _context.t0 = _context["catch"](4);
+              case 11:
+                _context.prev = 11;
+                _context.t0 = _context["catch"](5);
                 window.alert("Erro ao cadastrar");
                 window.location.reload();
 
-              case 14:
+              case 15:
+                return _context.abrupt("return");
+
+              case 16:
+                _context.prev = 16;
+                _this.btn = {
+                  status: true,
+                  label: "Editando...."
+                };
+                _context.next = 20;
+                return _services_api__WEBPACK_IMPORTED_MODULE_1__["default"].put("services/".concat(_this.idService), newService);
+
+              case 20:
+                window.alert("Editado com Sucesso");
+
+                _this.$router.push("/servicos/listar");
+
+                _context.next = 29;
+                break;
+
+              case 24:
+                _context.prev = 24;
+                _context.t1 = _context["catch"](16);
+                console.log(_context.t1);
+                window.alert("Erro ao Editar");
+                window.location.reload();
+
+              case 29:
+                return _context.abrupt("return");
+
+              case 30:
               case "end":
                 return _context.stop();
             }
           }
-        }, _callee, null, [[4, 10]]);
+        }, _callee, null, [[5, 11], [16, 24]]);
+      }))();
+    },
+    handleDelete: function handleDelete() {
+      var _this2 = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                _context2.prev = 0;
+                _context2.next = 3;
+                return _services_api__WEBPACK_IMPORTED_MODULE_1__["default"]["delete"]("services/".concat(_this2.idService));
+
+              case 3:
+                window.alert("Deletado com Sucesso");
+
+                _this2.$router.push("/servicos/listar");
+
+                _context2.next = 10;
+                break;
+
+              case 7:
+                _context2.prev = 7;
+                _context2.t0 = _context2["catch"](0);
+                console.log(_context2.t0); // window.alert("Erro ao Excluir");
+                // window.location.reload();
+
+              case 10:
+                console.log("delete");
+
+              case 11:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2, null, [[0, 7]]);
       }))();
     }
+  },
+  mounted: function mounted() {
+    var _this3 = this;
+
+    if (this.idService === undefined) {
+      this.service = {
+        client: "",
+        salesman: "",
+        description: "",
+        price: ""
+      };
+      return;
+    }
+
+    _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3() {
+      var _yield$api$get, data;
+
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee3$(_context3) {
+        while (1) {
+          switch (_context3.prev = _context3.next) {
+            case 0:
+              _context3.prev = 0;
+              _context3.next = 3;
+              return _services_api__WEBPACK_IMPORTED_MODULE_1__["default"].get("services/".concat(_this3.idService));
+
+            case 3:
+              _yield$api$get = _context3.sent;
+              data = _yield$api$get.data;
+              _this3.service = data;
+              _context3.next = 11;
+              break;
+
+            case 8:
+              _context3.prev = 8;
+              _context3.t0 = _context3["catch"](0);
+
+              _this3.$router.push('/servicos/listar');
+
+            case 11:
+            case "end":
+              return _context3.stop();
+          }
+        }
+      }, _callee3, null, [[0, 8]]);
+    }))(); // console.log(this.$route.params.id);
+
+
+    this.header = "Editar Serviço";
+    this.btn = {
+      label: "Editar"
+    };
   }
 });
 
@@ -3865,6 +4000,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
 
 
 
@@ -3882,7 +4018,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   },
   data: function data() {
     return {
-      date: "",
+      date: "2020-08-14",
       client: "",
       salesman: "",
       services: []
@@ -3923,13 +4059,43 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       }))();
     }
   },
+  mounted: function mounted() {
+    var _this2 = this;
+
+    _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
+      var _yield$api$get2, data;
+
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
+        while (1) {
+          switch (_context2.prev = _context2.next) {
+            case 0:
+              _context2.next = 2;
+              return _services_api__WEBPACK_IMPORTED_MODULE_1__["default"].get("services");
+
+            case 2:
+              _yield$api$get2 = _context2.sent;
+              data = _yield$api$get2.data;
+              _this2.services = data;
+
+            case 5:
+            case "end":
+              return _context2.stop();
+          }
+        }
+      }, _callee2);
+    }))();
+  },
   // setup() {
+  //   let services
   //   const { data, error, mutate } = useSWRV("services", async (url) => {
   //     const response = await api.get(url);
+  //     console.log(response.data)
+  //     services = response.data
   //     return response.data;
   //   });
   //   return {
   //     data,
+  //     services
   //   };
   // },
   filters: {
@@ -8513,7 +8679,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\nmain[data-v-02cbd04a] {\r\n  display: flex;\r\n  flex-direction: column;\r\n  align-items: center;\r\n  justify-content: center;\n}\nform[data-v-02cbd04a] {\r\n  width: 100%;\n}\nform .input-block[data-v-02cbd04a] {\r\n  /* background: red; */\r\n  width: 100%;\r\n  display: grid;\r\n  grid-template-columns: repeat(2, 1fr);\r\n  -moz-column-gap: 2rem;\r\n       column-gap: 2rem;\n}\nform .input-block button[data-v-02cbd04a] {\r\n  width: 100%;\r\n  color: #fff;\r\n  background-color: #007bff;\r\n  border-color: #007bff;\r\n  cursor: pointer;\r\n  padding: 0.7rem;\r\n  border-radius: 5px;\r\n  font-weight: 500;\r\n  font-size: 1rem;\r\n  border: 1px solid transparent;\n}\nform .input-block a[data-v-02cbd04a] {\r\n  width: 100%;\r\n  color: #fff;\r\n  background-color: #545b62;\r\n  border-color: #545b62;\r\n  cursor: pointer;\r\n  padding: 0.7rem;\r\n  border-radius: 5px;\r\n  font-weight: 500;\r\n  text-decoration: none;\r\n  font-size: 1rem;\r\n  border: 1px solid transparent;\r\n  display: block;\r\n  text-align: center;\n}\r\n", ""]);
+exports.push([module.i, "\nmain[data-v-02cbd04a] {\r\n  display: flex;\r\n  flex-direction: column;\r\n  align-items: center;\r\n  justify-content: center;\n}\nform[data-v-02cbd04a] {\r\n  width: 100%;\n}\nform .input-block[data-v-02cbd04a] {\r\n  /* background: red; */\r\n  width: 100%;\r\n  display: grid;\r\n  grid-template-columns: repeat(2, 1fr);\r\n  -moz-column-gap: 2rem;\r\n       column-gap: 2rem;\n}\nform .input-block button[data-v-02cbd04a] {\r\n  width: 100%;\r\n  color: #fff;\r\n  background-color: #007bff;\r\n  border-color: #007bff;\r\n  cursor: pointer;\r\n  padding: 0.7rem;\r\n  border-radius: 5px;\r\n  font-weight: 500;\r\n  font-size: 1rem;\r\n  border: 1px solid transparent;\n}\nform .input-block a[data-v-02cbd04a] {\r\n  width: 100%;\r\n  color: #fff;\r\n  background-color: #545b62;\r\n  border-color: #545b62;\r\n  cursor: pointer;\r\n  padding: 0.7rem;\r\n  border-radius: 5px;\r\n  font-weight: 500;\r\n  text-decoration: none;\r\n  font-size: 1rem;\r\n  border: 1px solid transparent;\r\n  display: block;\r\n  text-align: center;\n}\n#delete[data-v-02cbd04a] {\r\n  width: 100%;\r\n  display: flex;\r\n\r\n  flex-direction: column;\r\n  /* justify-content: end; */\r\n  align-items: flex-end;\n}\n#btn-delete[data-v-02cbd04a] {\r\n  width: 10rem;\r\n  padding: 0.7rem;\r\n  background: red;\r\n  border: 1px solid transparent;\r\n  font-size: 1rem;\r\n  font-weight: 500;\r\n  float: right;\r\n  color: #fff;\r\n  cursor: pointer;\r\n\r\n  /* font */\n}\r\n", ""]);
 
 // exports
 
@@ -63108,9 +63274,22 @@ var render = function() {
     [
       _c("Navbar"),
       _vm._v(" "),
-      _c("Header", { attrs: { text: "Cadastrar Serviço" } }),
+      _c("Header", { attrs: { text: _vm.header } }),
       _vm._v(" "),
       _c("main", [
+        _c("div", { attrs: { id: "delete" } }, [
+          _vm.idService
+            ? _c(
+                "button",
+                {
+                  attrs: { id: "btn-delete" },
+                  on: { click: _vm.handleDelete }
+                },
+                [_vm._v("Excluir Serviço")]
+              )
+            : _vm._e()
+        ]),
+        _vm._v(" "),
         _c(
           "form",
           { on: { submit: _vm.handleSubmit } },
@@ -63159,11 +63338,11 @@ var render = function() {
               ],
               attrs: { label: "Valor" },
               model: {
-                value: _vm.service.priceInitial,
+                value: _vm.service.price,
                 callback: function($$v) {
-                  _vm.$set(_vm.service, "priceInitial", $$v)
+                  _vm.$set(_vm.service, "price", $$v)
                 },
-                expression: "service.priceInitial"
+                expression: "service.price"
               }
             }),
             _vm._v(" "),
@@ -63278,21 +63457,33 @@ var render = function() {
                   _vm._v(" "),
                   _vm._l(_vm.services, function(service) {
                     return _c("tbody", { key: service.id }, [
-                      _c("tr", [
-                        _c("th", [
-                          _vm._v(_vm._s(_vm._f("moment")(service.created_at)))
-                        ]),
-                        _vm._v(" "),
-                        _c("td", [_vm._v(_vm._s(service.client))]),
-                        _vm._v(" "),
-                        _c("td", [_vm._v(_vm._s(service.salesman))]),
-                        _vm._v(" "),
-                        _c("td", [_vm._v(_vm._s(service.description))]),
-                        _vm._v(" "),
-                        _c("td", [
-                          _vm._v(_vm._s(_vm._f("toCurrency")(service.price)))
-                        ])
-                      ])
+                      _c(
+                        "tr",
+                        [
+                          _c(
+                            "router-link",
+                            { attrs: { to: "/servicos/editar/" + service.id } },
+                            [
+                              _c("th", [
+                                _vm._v(
+                                  _vm._s(_vm._f("moment")(service.created_at))
+                                )
+                              ])
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c("td", [_vm._v(_vm._s(service.client))]),
+                          _vm._v(" "),
+                          _c("td", [_vm._v(_vm._s(service.salesman))]),
+                          _vm._v(" "),
+                          _c("td", [_vm._v(_vm._s(service.description))]),
+                          _vm._v(" "),
+                          _c("td", [
+                            _vm._v(_vm._s(_vm._f("toCurrency")(service.price)))
+                          ])
+                        ],
+                        1
+                      )
                     ])
                   })
                 ],
@@ -78659,6 +78850,9 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
     component: _views_ServiceList__WEBPACK_IMPORTED_MODULE_6__["default"]
   }, {
     path: '/servicos/cadastrar',
+    component: _views_ServiceForm__WEBPACK_IMPORTED_MODULE_7__["default"]
+  }, {
+    path: '/servicos/editar/:id',
     component: _views_ServiceForm__WEBPACK_IMPORTED_MODULE_7__["default"]
   }, {
     path: '/teste',

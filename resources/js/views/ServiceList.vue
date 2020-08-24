@@ -9,7 +9,6 @@
       <Input label="Vendedor" v-model="salesman" @input="handleSubmit" />
 
       <!-- <p v-if="!data">Carregando ....</p> -->
-
       <table v-if="services.length > 0">
         <thead>
           <tr>
@@ -21,9 +20,12 @@
             <th scope="col">Valor (R$)</th>
           </tr>
         </thead>
+
         <tbody v-for="service in services" :key="service.id">
           <tr>
-            <th>{{service.created_at | moment }}</th>
+            <router-link :to="`/servicos/editar/${service.id}`">
+              <th>{{service.created_at | moment }}</th>
+            </router-link>
             <!-- <th scope="row">{{service.id }}</th> -->
             <td>{{service.client }}</td>
             <td>{{service.salesman }}</td>
@@ -32,7 +34,6 @@
           </tr>
         </tbody>
       </table>
-      
     </main>
     <Footer />
   </div>
@@ -58,7 +59,7 @@ export default {
 
   data() {
     return {
-      date: "",
+      date: "2020-08-14",
       client: "",
       salesman: "",
       services: [],
@@ -75,17 +76,27 @@ export default {
       const { data } = await api.get("services", {
         params: obj,
       });
-      this.services = data
+      this.services = data;
       // console.log(data);
     },
   },
+  mounted() {
+    (async () => {
+      const { data } = await api.get("services");
+      this.services = data;
+    })();
+  },
   // setup() {
+  //   let services
   //   const { data, error, mutate } = useSWRV("services", async (url) => {
   //     const response = await api.get(url);
+  //     console.log(response.data)
+  //     services = response.data
   //     return response.data;
   //   });
   //   return {
   //     data,
+  //     services
   //   };
   // },
   filters: {

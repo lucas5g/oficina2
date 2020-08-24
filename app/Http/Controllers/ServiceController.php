@@ -24,7 +24,6 @@ class ServiceController extends Controller
         return $services;
     }
 
-
     /**
      * Store a newly created resource in storage.
      *
@@ -44,41 +43,49 @@ class ServiceController extends Controller
 
         return $service;
 
-        
-
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Service  $service
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Service $service)
     {
-        //
+        return $service;
     }
+
+
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \App\Service  $service
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Service $service)
     {
-        //
+        $service->client = $request->client;
+        $service->salesman = $request->salesman;
+        $service->description = $request->description;
+        $service->price = $request->price;
+
+        $service->save();
+
+        return $service;
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  \App\Service  $service
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Service $service)
     {
-        //
+        // If successfully deleted, it will return status 200
+        return $service->delete();
     }
 }

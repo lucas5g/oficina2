@@ -4,23 +4,26 @@
     <Navbar />
     <Header :text="header" />
     <main>
-      <div id="delete">
-        <button id="btn-delete" v-if="idService" @click="handleDelete">Excluir Serviço</button>
-      </div>
-      <form @submit="handleSubmit">
-        <Input label="Cliente" v-model="service.client" />
-
-        <Input label="Vendedor" v-model="service.salesman" />
-
-        <TextArea label="Descrição" v-model="service.description" />
-
-        <Input label="Valor" v-model="service.price" v-money="money" />
-
-        <div class="input-block">
-          <button class="button" type="submit" v-bind:disabled="btn.status">{{btn.label}}</button>
-          <router-link class="button" type="submit" to="/servicos/listar">Cancelar</router-link>
+      <p v-if="!service">Carregando ....</p>
+      <template v-else>
+        <div id="delete">
+          <button id="btn-delete" v-if="idService" @click="handleDelete">Excluir Serviço</button>
         </div>
-      </form>
+        <form @submit="handleSubmit">
+          <Input label="Cliente" v-model="service.client" />
+
+          <Input label="Vendedor" v-model="service.salesman" />
+
+          <TextArea label="Descrição" v-model="service.description" />
+
+          <Input label="Valor" v-model="service.price" v-money="money" />
+
+          <div class="input-block">
+            <button class="button" type="submit" v-bind:disabled="btn.status">{{btn.label}}</button>
+            <router-link class="button" type="submit" to="/servicos/listar">Cancelar</router-link>
+          </div>
+        </form>
+      </template>
     </main>
     <Footer />
     <!-- </div> -->
@@ -49,17 +52,18 @@ export default {
     return {
       btn: { status: false, label: "Cadastrar" },
       header: "Cadastrar Serviço",
-      service: {
-        // client: "João vinicios",
-        // salesman: "Rodrigo Junior",
-        // description: "Troca das pastilhas",
-        // price: "1350.00",
+      service: '',
+      // service: {
+      //   // client: "João vinicios",
+      //   // salesman: "Rodrigo Junior",
+      //   // description: "Troca das pastilhas",
+      //   // price: "1350.00",
 
-        client: "",
-        salesman: "",
-        description: "",
-        price: "",
-      },
+      //   client: "",
+      //   salesman: "",
+      //   description: "",
+      //   price: "",
+      // },
       idService: this.$route.params.id,
       money: {
         decimal: ",",
@@ -143,11 +147,11 @@ export default {
       try {
         const { data } = await api.get(`services/${this.idService}`);
         this.service = data;
-      }catch(err){
-        this.$router.push('/servicos/listar')
+      } catch (err) {
+        this.$router.push("/servicos/listar");
       }
     })();
-
+    console.log(this.service)
     // console.log(this.$route.params.id);
     this.header = "Editar Serviço";
     this.btn = {

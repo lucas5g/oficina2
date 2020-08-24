@@ -10,8 +10,9 @@
         <Input label="Vendedor" v-model="salesman" @input="handleSubmit" />
       </div>
 
-      <!-- <p v-if="!data">Carregando ....</p> -->
-      <table v-if="services.length > 0">
+      <p v-if="loading">Carregando...</p>
+      <p v-if="services.length === 0 && date && !loading">Nada Encontrado :(</p>
+      <table v-if="services.length > 0 && !loading">
         <thead>
           <tr>
             <!-- <th scope="col">ID</th> -->
@@ -25,9 +26,9 @@
 
         <tbody v-for="service in services" :key="service.id">
           <tr>
-            <router-link :to="`/servicos/editar/${service.id}`">
-              <th>{{service.created_at | moment }}</th>
-            </router-link>
+            <th title="Clique para mais opções">
+              <router-link :to="`/servicos/editar/${service.id}`">{{service.created_at | moment }}</router-link>
+            </th>
             <!-- <th scope="row">{{service.id }}</th> -->
             <td>{{service.client }}</td>
             <td>{{service.salesman }}</td>
@@ -65,6 +66,7 @@ export default {
       client: "",
       salesman: "",
       services: [],
+      loading: false, 
     };
   },
   methods: {
@@ -75,9 +77,13 @@ export default {
         salesman: this.salesman,
       };
 
+      this.loading = true
+
       const { data } = await api.get("services", {
         params: obj,
       });
+      this.loading = false
+
       this.services = data;
       // console.log(data);
     },
@@ -108,7 +114,6 @@ export default {
 
 
 <style scoped>
-
 table {
   border-collapse: collapse;
   width: 100%;
@@ -126,7 +131,6 @@ td {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-gap: 1rem;
-
   }
 }
 </style>

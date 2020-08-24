@@ -12,9 +12,10 @@ class Service extends Model
         $servicesFilter = $this::where([
             ['created_at', 'LIKE',  "{$date}%"],
             ['client', 'LIKE',  "%{$client}%"],
-            ['salesman', 'LIKE', "%{$salesman}%"],
-
-        ])->get();
+            ['salesman', 'LIKE', "%{$salesman}%"]])
+        ->orderBy('created_at', 'desc')
+        ->limit(10)
+        ->get();
 
         return $servicesFilter;
     }

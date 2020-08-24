@@ -14,5 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::resource('/services', 'ServiceController');
+
+
 Route::view('{path}', 'spa')->where('path', '[\/\w\.-]*');
 

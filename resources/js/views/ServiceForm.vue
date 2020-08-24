@@ -58,11 +58,6 @@ export default {
       //   // salesman: "Rodrigo Junior",
       //   // description: "Troca das pastilhas",
       //   // price: "1350.00",
-
-      //   client: "",
-      //   salesman: "",
-      //   description: "",
-      //   price: "",
       // },
       idService: this.$route.params.id,
       money: {
@@ -71,7 +66,6 @@ export default {
         prefix: "R$ ",
         precision: 2,
         masked: false /* doesn't work with directive */,
-        default: 15.0,
       },
     };
   },
@@ -121,16 +115,23 @@ export default {
     },
 
     async handleDelete() {
+
+      const confirm = window.confirm('Tem certeza em Excluir o Serviço !?')
+
+      if(!confirm){
+
+        return
+      }
+
       try {
         await api.delete(`services/${this.idService}`);
         window.alert("Deletado com Sucesso");
         this.$router.push("/servicos/listar");
       } catch (err) {
         console.log(err);
-        // window.alert("Erro ao Excluir");
-        // window.location.reload();
+        window.alert("Erro ao Excluir");
+        window.location.reload();
       }
-      console.log("delete");
     },
   },
   mounted() {
@@ -151,8 +152,6 @@ export default {
         this.$router.push("/servicos/listar");
       }
     })();
-    console.log(this.service)
-    // console.log(this.$route.params.id);
     this.header = "Editar Serviço";
     this.btn = {
       label: "Editar",

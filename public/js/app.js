@@ -4018,7 +4018,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   },
   data: function data() {
     return {
-      date: "2020-08-14",
+      date: "",
       client: "",
       salesman: "",
       services: []
@@ -4059,44 +4059,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       }))();
     }
   },
-  mounted: function mounted() {
-    var _this2 = this;
-
-    _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
-      var _yield$api$get2, data;
-
-      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
-        while (1) {
-          switch (_context2.prev = _context2.next) {
-            case 0:
-              _context2.next = 2;
-              return _services_api__WEBPACK_IMPORTED_MODULE_1__["default"].get("services");
-
-            case 2:
-              _yield$api$get2 = _context2.sent;
-              data = _yield$api$get2.data;
-              _this2.services = data;
-
-            case 5:
-            case "end":
-              return _context2.stop();
-          }
-        }
-      }, _callee2);
-    }))();
-  },
-  // setup() {
-  //   let services
-  //   const { data, error, mutate } = useSWRV("services", async (url) => {
-  //     const response = await api.get(url);
-  //     console.log(response.data)
-  //     services = response.data
-  //     return response.data;
-  //   });
-  //   return {
-  //     data,
-  //     services
-  //   };
+  // mounted() {
+  //   (async () => {
+  //     const { data } = await api.get("services");
+  //     this.services = data;
+  //   })();
   // },
   filters: {
     toCurrency: function toCurrency(value) {

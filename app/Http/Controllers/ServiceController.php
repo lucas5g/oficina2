@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\FormServiceRequest;
 use App\Service;
 use Illuminate\Http\Request;
 
@@ -30,9 +31,11 @@ class ServiceController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(FormServiceRequest $request)
     {
         $service = new Service();
+
+        $request->validated();
 
         $service->client = $request->client;
         $service->salesman = $request->salesman;
@@ -42,7 +45,6 @@ class ServiceController extends Controller
         $service->save();
 
         return $service;
-
     }
 
     /**
@@ -65,8 +67,10 @@ class ServiceController extends Controller
      * @param  \App\Service  $service
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Service $service)
+    public function update(FormServiceRequest $request, Service $service)
     {
+        $request->validated();
+        
         $service->client = $request->client;
         $service->salesman = $request->salesman;
         $service->description = $request->description;

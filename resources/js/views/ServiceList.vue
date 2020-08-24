@@ -59,7 +59,7 @@ export default {
 
   data() {
     return {
-      date: "2020-08-14",
+      date: "",
       client: "",
       salesman: "",
       services: [],
@@ -80,25 +80,13 @@ export default {
       // console.log(data);
     },
   },
-  mounted() {
-    (async () => {
-      const { data } = await api.get("services");
-      this.services = data;
-    })();
-  },
-  // setup() {
-  //   let services
-  //   const { data, error, mutate } = useSWRV("services", async (url) => {
-  //     const response = await api.get(url);
-  //     console.log(response.data)
-  //     services = response.data
-  //     return response.data;
-  //   });
-  //   return {
-  //     data,
-  //     services
-  //   };
+  // mounted() {
+  //   (async () => {
+  //     const { data } = await api.get("services");
+  //     this.services = data;
+  //   })();
   // },
+
   filters: {
     toCurrency: function (value) {
       const formatter = new Intl.NumberFormat("pt-BR", {

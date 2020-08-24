@@ -14,10 +14,13 @@ use Illuminate\Support\Facades\Route;
 */
 
 
-// Route::resource create routes with methods Rest Api
+/**
+ *Route::resource create routes with methods Rest Api
+ */
 Route::resource('/services', 'ServiceController');
 
-
-//Which route will be passed to view spa.
+/**
+ * Which route will be passed to view spa.
+ */
 Route::view('{path}', 'spa')->where('path', '[\/\w\.-]*');
 

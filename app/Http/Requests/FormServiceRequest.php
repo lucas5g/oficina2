@@ -29,25 +29,25 @@ class FormServiceRequest extends FormRequest
             'client' => ['required'],
             'salesman' => ['required'],
             'description' => ['required'],
-            'price' => ['required']
+            'price' => ['required', 'numeric']
         ];
     }
 
-    /**
-     * Get the error messages for the defined validation rules.
-     *
-     * @return array
-     */
-    public function messages()
-    {
-        return [
-            'client.required' => 'A Client is required',
-            'salesman.required' => 'A Salesman is required',
-            'description.required' => 'A Description is required',
-            'description.price' => 'A Price is required',
+    // /**
+    //  * Get the error messages for the defined validation rules.
+    //  *
+    //  * @return array
+    //  */
+    // public function messages()
+    // {
+    //     return [
+    //         'client.required' => 'A Client is required',
+    //         'salesman.required' => 'A Salesman is required',
+    //         'description.required' => 'A Description is required',
+    //         'description.price' => 'A Price is required',
 
-        ];
-    }
+    //     ];
+    // }
 
     /**
      * Get validation errors and returns json
